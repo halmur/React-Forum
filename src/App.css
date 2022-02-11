@@ -1,19 +1,61 @@
 .App {
   min-height: 100vh;
   /* background-color: lightseagreen; */
-  background-color: #4441;
+  background-color: #fcfdfc;
   display: grid;
-  grid-template: .072fr 1fr / 1fr;
-  row-gap: 50px;
+  grid-template: auto 1fr / 1fr;
+  row-gap: 100px;
 }
   .App-header {
     border-bottom: 1px solid #4444;
-    background-color: #ffbb84;
+    background-color: #73738e;
     font-size: 45px;
-    text-align: center;
   }
+    .App-header div {
+      text-align: center;
+    }
+
+
   .App-main {
-    width: 80%;
+    width: auto;
     justify-self: center;
-    background-color: #fff;
+
+    display: grid;
+    grid-template: auto / repeat(3, minmax(300px, 400px));
+    grid-row-gap: 20px;
+    grid-column-gap: 25px;
   }
+  .app-main-post-grids {
+    grid-template: auto / 520px;
+  }
+    .posts {
+      min-height: 55px;
+      box-sizing: border-box;
+      border: 1px solid #73738e44;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #0080ed;
+      box-shadow: 0 0 2px #4444;
+      transition: .3s;
+    }
+    .posts:hover {
+      box-shadow: 0 1px 2px #4444;
+      cursor: pointer;
+    }
+      .title {
+        display: block;
+        margin: 0;
+        padding: 15px 20px;
+        text-decoration: none;
+      }
+      .title:visited {
+        color: #0080ed;
+      }
+
+      .post {
+        display: grid;
+        grid-template-columns: auto / auto;
+      }
+        .comment {
+          border: 1px solid lightblue;
+        }
