@@ -4,26 +4,20 @@ import Post from './Post';
 
 
 const Posts = (props) => {
-  const [postComments, setPostComments] = useState(null)
+  console.log('All posts comp/page');
 
-  useEffect( async () => {
-    const commentsResponse = await fetch('https://jsonplaceholder.typicode.com/comments')
-    const commentsJson = await commentsResponse.json()
-    setPostComments(commentsJson)
-  }, [])
-  
-  const x = postID => {
-    const comments = postComments && postComments.filter( c => c.postId === postID)
-    return comments === null ? [] : comments
+  // kan också filtrera titel och body här i Posts.jsx och skicka direkt till Post.jsx. filtreras nu i Post.jsx..
+  const postComments = postID => {
+    return props.dataObj.comments && props.dataObj.comments.filter( c => c.postId === postID)
   }
 
   return (
     <>
-    {props.posts && props.posts.map( post => (
+    {props.dataObj.posts && props.dataObj.posts.map( post => (
       <div className="posts" key={post.id}>
-        <Link className='title' to={{
+        <Link className='title-link' to={{
           pathname: `/posts/${post.id}`,
-          state: [...x(post.id)]
+          state: [...postComments(post.id)]
           }}>
             {post.title}
         </Link>
