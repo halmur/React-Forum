@@ -2,6 +2,7 @@
   min-height: 100vh;
   /* background-color: lightseagreen; */
   background-color: #fcfdfc;
+  background-color: #012401; /* 4 alge mode */
   display: grid;
   grid-template: auto 1fr / 1fr;
   row-gap: 100px;
@@ -19,11 +20,12 @@
   .App-main {
     width: auto;
     justify-self: center;
+    margin: 0 10px 10px;
 
     display: grid;
-    grid-template: auto / repeat(3, minmax(300px, 400px));
-    grid-row-gap: 20px;
-    grid-column-gap: 25px;
+    grid-template: auto / repeat(3, minmax(200px, 340px));
+    grid-row-gap: 10px;
+    grid-column-gap: 15px;
   }
   .app-main-post-grids {
     grid-template: auto / 520px;
@@ -34,22 +36,20 @@
       border: 1px solid #73738e44;
       border-radius: 8px;
       background-color: #fff;
+      background-color: #022008; /* 4 alge mode */
       color: #0080ed;
       box-shadow: 0 0 2px #4444;
       transition: .3s;
     }
     .posts:hover {
-      box-shadow: 0 1px 2px #4444;
+      /* box-shadow: 0 1px 2px #4444; */
       cursor: pointer;
     }
-      .title {
+      .title-link {
         display: block;
-        margin: 0;
-        padding: 15px 20px;
+        margin: 15px;
         text-decoration: none;
-      }
-      .title:visited {
-        color: #0080ed;
+        color: #21913c; /* 4 alge mode */
       }
 
       .post {

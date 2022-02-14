@@ -7,13 +7,22 @@ import Post from './pages/Post';
 
 
 function App() {
-  const [posts, setPosts] = useState(null)
+  const [posts, setPosts] = useState([])
+  const [comments, setComments] = useState([])
   
 // fetch all posts
   useEffect( async () => {
     const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts')
     const postsJson = await postsResponse.json()
     setPosts(postsJson)
+  }, [])
+
+  
+  // fetcha all post comments
+  useEffect( async () => {
+    const commentsResponse = await fetch('https://jsonplaceholder.typicode.com/comments')
+    const commentsJson = await commentsResponse.json()
+    setComments(commentsJson)
   }, [])
   
   return (
@@ -26,8 +35,9 @@ function App() {
 
       <main className="App-main">
         <Switch>
-          <Route path="/posts/:id" render={ props => <Post {...props} posts={posts}/>} />
-          <Route path="/" render={ props => <Posts {...props} posts={posts}/>} />
+          <Route path="/posts/:postId" render={ props => <Post {...props} dataObj={{posts, comments}} />} />
+          {/* {posts && <Route path="/" render={ props => <Posts {...props} dataObj={[posts, comments]}/>} />} */}
+          {posts && <Route path="/" render={ props => <Posts {...props} dataObj={{posts, comments}}/>} />}
         </Switch>
       </main>
     </div>
