@@ -35,9 +35,8 @@ function App() {
 
       <main className="App-main">
         <Switch>
-          <Route path="/posts/:postId" render={ props => <Post {...props} dataObj={{posts, comments}} />} />
-          {/* {posts && <Route path="/" render={ props => <Posts {...props} dataObj={[posts, comments]}/>} />} */}
-          {posts && <Route path="/" render={ props => <Posts {...props} dataObj={{posts, comments}}/>} />}
+          {comments.length > 0 && <Route path="/posts/:postId" render={ props => <Post {...props} dataObj={{posts, comments}} />} />}
+          {posts.length > 0 && <Route path="/" render={ props => <Posts {...props} dataObj={{posts, comments}}/>} />}
         </Switch>
       </main>
     </div>

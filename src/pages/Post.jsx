@@ -1,61 +1,45 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Post = (props) => {
-  const [comments, setComments] = useState([])
-  console.log('Single post comp/page');
 
-  // const a = props.dataObj.posts && props.location.state.filter(c => {
-  //   // console.log(c.postId);
-  //   return c.postId == props.match.params.postId // olika primitiva datatyper därav två (==)
-  // })
-  // // const a = props.location.state.filter(c => c.id == props.match.params.postId)
-  // console.log('a', a);
-  
-  
-  let {title, body} = ['title', 'body']
-  if (props.dataObj.posts) {
-    console.log('props.dataObj.posts', props.dataObj.posts);
-    console.log('props.match.params.postId', props.match.params.postId);
-    const postHeaders = props.dataObj.posts && props.dataObj.posts.filter(post => post.id == props.match.params.postId)
-    console.log(postHeaders);
-    title = postHeaders[0].title
-    body = postHeaders[0].body
+  /* All needed post data is assigned to the postObj variable
+    
+     dataOverUrl()
+       - when location.state object is undefined, use data from props.posts and props.comments objects
 
-  }
-  
-  if (props.location.state === undefined) {
-    const fetchComments = async () => {
-      const commentsResponse = await fetch('https://jsonplaceholder.typicode.com/comments')
-      const commentsJson = await commentsResponse.json()
-      setComments(commentsJson)
+     dataOverLink()
+       - when location.state object is defined, use data from location.state 
+  */
+  const dataOverUrl = () => {
+    const post = props.dataObj.posts.find( p => p.id == props.match.params.postId)
+
+    return {
+      postHeadings: {title: post.title, body: post.body},
+      postComments: props.dataObj.comments.filter( c => c.postId == props.match.params.postId)
     }
-    fetchComments()
   }
- 
+  const dataOverLink = () => props.location.state
+  const postObj = props.location.state === undefined ? dataOverUrl() : dataOverLink()
 
-  useEffect( _=> {
-    console.log('post EFX');
+  // effect to change grid layout of App-main, the (main) element
+  useEffect( _ => {
     const appMain = document.querySelector('.App-main')
     appMain.className += ' app-main-post-grids'
 
     return _ => appMain.className = 'App-main'
   }, [])
 
-  console.log('End post.jsx');
-  console.log('__________________________');
   return (
     <section className="post">
-      {props.location.state ? 
+      {postObj ? 
       <>
-      <h1>{title}</h1>
-      <p>{body}</p>
-      {/* <span id="total-comments">({Object.keys(props.location.state).length}) comments</span> */}
+      <h1>{postObj.postHeadings.title}</h1>
+      <p>{postObj.postHeadings.body}</p>
+      <span id="total-comments">({postObj.postComments.length}) comments</span>
 
       <div id="comments">
-        {/* props.location.state skickas som postComments, måste blir bättre på destructuring^^
-         */}
-        {props.location.state.map((comment, i) => {
+        {postObj.postComments.map((comment, i) => {
           return <div key={i} className="comment">
             <p>{comment.name}</p>
             <p>{comment.email}</p>

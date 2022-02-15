@@ -1,8 +1,8 @@
 .App {
   min-height: 100vh;
   /* background-color: lightseagreen; */
-  background-color: #fcfdfc;
   background-color: #012401; /* 4 alge mode */
+  background-color: #fcfdfc;
   display: grid;
   grid-template: auto 1fr / 1fr;
   row-gap: 100px;
@@ -35,8 +35,8 @@
       box-sizing: border-box;
       border: 1px solid #73738e44;
       border-radius: 8px;
-      background-color: #fff;
       background-color: #022008; /* 4 alge mode */
+      background-color: #fff;
       color: #0080ed;
       box-shadow: 0 0 2px #4444;
       transition: .3s;
@@ -49,7 +49,8 @@
         display: block;
         margin: 15px;
         text-decoration: none;
-        color: #21913c; /* 4 alge mode */
+        /* color: #21913c; */
+         /* 4 alge mode */
       }
 
       .post {
