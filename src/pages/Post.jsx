@@ -25,38 +25,46 @@ const Post = (props) => {
   // effect to change grid layout of App-main, the (main) element
   useEffect( _ => {
     const appMain = document.querySelector('.App-main')
-    appMain.className += ' app-main-post-grids'
+    appMain.className += ' app-main_post-grids'
 
     return _ => appMain.className = 'App-main'
   }, [])
 
   return (
-    <section className="post">
+    <>
+    <section id="post">
       {postObj ? 
       <>
-      <h1>{postObj.postHeadings.title}</h1>
-      <p>{postObj.postHeadings.body}</p>
-      <span id="total-comments">({postObj.postComments.length}) comments</span>
+      <h1 id="post-title">{postObj.postHeadings.title}</h1>
+      <p id="post-body">{postObj.postHeadings.body}</p>
 
       <div id="comments">
-        {postObj.postComments.map((comment, i) => {
-          return <div key={i} className="comment">
-            <p>{comment.name}</p>
-            <p>{comment.email}</p>
-            <p>{comment.body}</p>
+        <span id="total-comments">
+          comments (<span>{postObj.postComments.length}</span>)
+        </span>
+        
+        {postObj.postComments.map((comment, i) => (
+          <div key={i} className="comment">
+            <div className="c-img">
+              <span>{`${comment.name.charAt(0)}.${comment.email.charAt(0)}`}</span>
+            </div>
+            <span className="c-name">{comment.name}</span>
+            <span className="c-email">{comment.email}</span>
+            <p className="c-txt">{comment.body}</p>
           </div>
-        })}
+        ))}
       </div>
 
       <div id="add-comment">
-        <input type="text" placeholder="Write comment" />
-        <button>Add Comment</button>
+        <input type="text" placeholder="Write an answer" />
+        <button>comment</button>
       </div>
       </> :
       <h1>loading</h1>}
-
-      <Link to="/">back to posts</Link>
     </section>
+
+    <Link to="/" id="back-to-posts">back to Posts</Link>
+    </>
   )
 }
 
